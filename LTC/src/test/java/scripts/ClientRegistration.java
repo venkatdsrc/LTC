@@ -59,7 +59,7 @@ public class ClientRegistration extends BaseTest {
 */		 
 		 Thread.sleep(6000);
 		 if (true) {
-			 Assert.assertTrue(true);
+			 Assert.assertTrue(false);
 		 }
 	
 		 
@@ -69,7 +69,7 @@ public class ClientRegistration extends BaseTest {
 	}
 	  
    }
-   
+   /*
    @Test(groups ={"Smoke"})
    public void viewClient() throws Exception {
  	  
@@ -87,7 +87,7 @@ public class ClientRegistration extends BaseTest {
 	}
 	  
    }
-
+*/
   @AfterMethod
   public void afterMethod() throws InterruptedException {
 	  
