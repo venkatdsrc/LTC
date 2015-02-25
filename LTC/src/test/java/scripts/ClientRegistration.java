@@ -34,7 +34,7 @@ public class ClientRegistration extends BaseTest {
    public void addClient() throws Exception {
  	  
 	  try {
-		System.out.println("Inside addClient() test method....");
+		System.out.println("Inside addClient() test method..");
 		  Thread.sleep(2000);
 		  String currURL = driver.getCurrentUrl();
 		  String currPageTitle = driver.getTitle();
