@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FileUtils;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -17,34 +18,39 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
 import org.testng.Reporter;
+import main.java.pages.LoginPage;
 
 import test.java.utils.BaseTest;
+
 
 public class ClientRegistration extends BaseTest {
 	
 	//public WebDriver driver;
 	
+
    @Test(groups ={"Regression"})
    public void addClient() throws Exception {
  	  
 	  try {
-		System.out.println("Inside addClient method-tag added");
+		  System.out.println("Inside addClient method-tag added-for Veenu");
 		  Thread.sleep(2000);
 		  String currURL = driver.getCurrentUrl();
 		  String currPageTitle = driver.getTitle();
 		  String currWinHandle = driver.getWindowHandle();
+		  //
+			 //
 		  
-		 driver.findElement(By.id("ctl00_lnkLogin")).click();
-		 driver.findElement(By.id("ctl00_ContentMainHolder_txtUserName")).sendKeys("veenu.s@dsrc.co.in");
-		 driver.findElement(By.id("ctl00_ContentMainHolder_txtPassword")).sendKeys("dsrc12345");
-		 driver.findElement(By.name("ctl00$ContentMainHolder$btnLogin")).click();
- 		 driver.findElement(By.id("ctl00_ContentMainHolder_btnAcceptPrivacyPolicy")).click();
+		  LoginPage objLoginPage = new LoginPage(driver);
+		  objLoginPage.loginToLTC("veenu.s@dsrc.co.in", "dsrc12345");
+		  
+		 
+ 		 
 /*		 
 		 WebElement el = driver.findElement(By.partialLinkText("Client Processin")); 
 		 Actions builder = new Actions(driver); 
