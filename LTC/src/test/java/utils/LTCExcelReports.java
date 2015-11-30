@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -45,6 +46,7 @@ String sTestRptPath;
 
 	//Method to create Report headers	
 	public void reportHeader(){
+		System.out.println("Inside reportHeader()");
 		row = sheet.createRow(0);
 		row.createCell(0).setCellValue("S.No");
 		row.createCell(1).setCellValue("Description");
@@ -54,6 +56,7 @@ String sTestRptPath;
 
 	//Method to close the workbook				
 	public void closeWorkbook() throws IOException{
+		System.out.println("Inside closeWorkbook()");
 		File file = new File(sTestRptPath);
 		File[] files = file.listFiles();
 		if (files != null) {
@@ -70,6 +73,15 @@ String sTestRptPath;
 //Method to report test case status 		
 	public void reportEvent(String tcID,String tcDesc,String tcStatus){
 		
+		
+		HSSFCellStyle style = wb.createCellStyle();
+		HSSFFont font = wb.createFont();
+		font.setColor(HSSFColor.BLACK.index);
+		style.setFillBackgroundColor(HSSFColor.DARK_GREEN.index);
+				
+		//style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+		style.setFont(font);
+		System.out.println("Inside reportEvent()" + tcStatus);
 		int newRow= sheet.getLastRowNum()+1;
 		CellStyle cstyle;
 		row = sheet.createRow(newRow);			
@@ -80,12 +92,7 @@ String sTestRptPath;
 		cell2.setCellValue(tcDesc);
 		cell3=row.createCell(2);
 		cell3.setCellValue(tcStatus);
-		
-		
-		
-	
-		
-		 
+		cell3.setCellStyle(style);
 		
 		}
 

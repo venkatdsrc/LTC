@@ -5,10 +5,18 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
@@ -22,23 +30,33 @@ public class BaseTest extends TestListenerAdapter
 {
     protected WebDriver driver;
 
-    @Parameters({ "os", "os_version", "browser", "browser_version" })
+    @Parameters({ "os","browser" })
     @BeforeTest(alwaysRun = true)
-    public void setUp(String os, String os_version, String browser, String browser_version)
+    public void setUp(String os, String browser)
     {
     	
     	System.out.println("Inside before test of base class");
         System.setProperty("os", os);
-        System.setProperty("os_version", os_version);
+       // System.setProperty("os_version", os_version);
         System.setProperty("browser", browser);
-        System.setProperty("browser_version", browser_version);
-
-        driver = new FirefoxDriver();
-        driver.manage().window().maximize();
+       // System.setProperty("browser_version", browser_version);
+   	
+        //driver = new HtmlUnitDriver();
+      //  driver = new FirefoxDriver();
+        
+        //driver = new ChromeDriver();
+        
+        System.setProperty("webdriver.ie.driver", "C:\\Users\\venkatragavan\\git\\ltc\\LTC\\drivers\\IEDriverServer_Win32_2.44.0\\IEDriverServer.exe");
+    	DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+    	capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+    	capabilities.setCapability("ignoreZoomSetting", true);
+    	capabilities.setCapability("ignoreProtectedModeSettings" , true);
+    	driver = new InternetExplorerDriver(capabilities);
+    	driver.manage().window().maximize();
 	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	    driver.get(PropertyUtils.getProperty("app.url"));
-
-        new WebDriverWait(driver, 25).until(ExpectedConditions.titleContains("Welcome To"));
+	    Actions act = new Actions(driver);
+	    new WebDriverWait(driver, 25).until(ExpectedConditions.titleContains("Welcome To"));
     }
 
     @AfterTest(alwaysRun = true)

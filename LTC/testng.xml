@@ -1,36 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Mid America Automation Project" parallel="tests" thread-count="4" configfailurepolicy="continue">
-	<listeners>
-		<listener class-name="test.java.utils.LTCCustomizedReporter" />
-		<listener class-name="test.java.utils.BaseTest" />
-	</listeners>
+<suite name="Mid America Automation Project">
+	 <listeners>
+        <listener class-name="org.testng.reporters.SuiteHTMLReporter" />
+    </listeners>
+    
 <test name="Run on Windows7/FF" >
  	<parameter name="os" value="windows" />
-		<parameter name="os_version" value="7" />
-		<parameter name="browser" value="firefox" />
-		<parameter name="browser_version" value="32.0" />
+		<parameter name="browser" value="iexplore" />
 		<groups>
-			<run>
-				<exclude name="Smoke" />
-			</run>
+		<run>
+			<include name="Regression"/>
+		</run>
+		<run>
+			<exclude name="Smoke"/>
+		</run>
+		
 		</groups>
-  	 <classes>
-		<class name="test.java.scripts.ClientRegistration"/>
- 	</classes>
-</test> <!-- Default test -->
-
-<test name="Run on Windows7/FF2" >
- 	<parameter name="os" value="windows" />
-		<parameter name="os_version" value="7" />
-		<parameter name="browser" value="firefox" />
-		<parameter name="browser_version" value="32.0" />
-		<groups>
-			<run>
-				<exclude name="Smoke" />
-			</run>
-		</groups>
-  	 <classes>
+	 <classes>
 		<class name="test.java.scripts.ClientRegistration"/>
  	</classes>
 </test> <!-- Default test -->
