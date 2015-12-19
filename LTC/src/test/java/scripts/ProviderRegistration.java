@@ -79,7 +79,7 @@ public void setUp1() {
    public void addProvider() throws Exception {
  	  
 	  try {
-		  System.out.println("Inside addProvider method - 19/12/15");
+		  System.out.println("Inside addProvider method - 19/12/1 at 617pm");
 		  Thread.sleep(2000);
 		  String currURL = driver.getCurrentUrl();
 		  String currPageTitle = driver.getTitle();
