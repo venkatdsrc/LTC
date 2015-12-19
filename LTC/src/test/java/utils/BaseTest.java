@@ -2,6 +2,9 @@ package test.java.utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
@@ -26,9 +29,10 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 
+
 public class BaseTest extends TestListenerAdapter
 {
-    protected WebDriver driver;
+    protected static InternetExplorerDriver driver;
 
     @Parameters({ "os","browser" })
     @BeforeTest(alwaysRun = true)
@@ -59,6 +63,37 @@ public class BaseTest extends TestListenerAdapter
 	    new WebDriverWait(driver, 25).until(ExpectedConditions.titleContains("Welcome To"));
     }
 
+    
+    
+    public static void takeScreenShot(String strTest) {
+	
+		
+		try {
+			//File file = new File(sFinalPath + strTest + ".png");
+				System.out.println("Inside test base screenshot method..");
+			   DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd-HHmmss");
+			   Date date = new Date();
+		       String today = dateFormat.format(date);
+		   	
+		   		File file = new File("C:\\Users\\venkatragavan\\git\\ltc\\LTC\\screenshots\\"+strTest+today+".png");
+			//	if (!file.exists()) {
+				//	file.mkdir();
+			//	}
+				
+			Thread.sleep(4000);
+			File tmpFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			FileUtils.copyFile(tmpFile, file);
+		} catch (IOException ioe ) {
+			ioe.printStackTrace();
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		
+	}
+
+	
+
     @AfterTest(alwaysRun = true)
     public void tearDown()
     {
@@ -75,12 +110,23 @@ public class BaseTest extends TestListenerAdapter
     @Override
     public void onTestSkipped(ITestResult result)
     {
+    	Reporter.log("Inside onTestSkipped");
         onTestFailure(result);
     }
+    
+    @Override
+	public void onTestSuccess(ITestResult result) {
+		
+    	Reporter.log("Inside onTestSuccess");
+		String methodName = result.getName().toString().trim();
+		
+	}
+	
 
     @Override
     public void onTestFailure(ITestResult result)
     {
+    	Reporter.log("Inside onTestFailure");
         Object currentClass = result.getInstance();
         WebDriver driver = ((BaseTest) currentClass).getDriverInstance();
 
