@@ -2,6 +2,7 @@ package test.java.scripts;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -79,11 +80,11 @@ public void setUp1() {
    public void addProvider() throws Exception {
  	  
 	  try {
-		  System.out.println("Inside addProvider method - 19/12/1 at 617pm");
 		  Thread.sleep(2000);
 		  String currURL = driver.getCurrentUrl();
 		  String currPageTitle = driver.getTitle();
 		  String currWinHandle = driver.getWindowHandle();
+		  System.out.println("Updated on 16/3..");
 		  System.out.println("Current URL : " + currURL + " "+ "Current Page Title : "+currPageTitle+" " + "Current Window Handle : " + currWinHandle);
 		  
 		  LoginPage objLoginPage = new LoginPage(driver);
@@ -106,9 +107,7 @@ public void setUp1() {
 		  txtProviderEINPart1.sendKeys("12");
 		  WebElement txtProviderEINPart2 = driver.findElement(By.id("ctl00_ContentMainHolder_ucProviderInformation_txtEIN7"));
 		  txtProviderEINPart2.sendKeys("1234567");
-		 
-		  /*
-		  
+		 /*
 		  WebElement inputProviderType = driver.findElement(By.id("ctl00_ContentMainHolder_ucProviderInformation_txtProviderType"));
 		  inputProviderType.click();
 		  Thread.sleep(2000);
@@ -118,13 +117,19 @@ public void setUp1() {
 		  objProviderTypeSelect.selectByIndex(1);
 		  objProviderTypeSelect.selectByIndex(2);
 		  Thread.sleep(4000);
+		  */
 		  WebElement locationInformationSection = driver.findElement(By.id("ctl00_ContentMainHolder_pnlHeaderLocationInfo"));
+		 // List <WebElement> allFormChildElements = locationInformationSection.findElements(By.xpath("*"));
+		  //System.out.println("No. of section elements : " + allFormChildElements.size());
 		  locationInformationSection.click();
 		  Thread.sleep(4000);
-		  WebElement locationName = driver.findElement(By.id("ctl00_ContentMainHolder_ucLocationInformation_txtLocationName"));
+		  
+
+		  WebElement locationName = driver.findElement(By.name("ctl00$ContentMainHolder$ucLocationInformation$txtLocationName"));
+		  
 		  locationName.sendKeys("Location1");
 		  Thread.sleep(2000);
-			
+/*			
 		  WebElement locationAddress1 = driver.findElement(By.id("ctl00_ContentMainHolder_ucLocationInformation_txtAddress"));
 		  locationAddress1.sendKeys("1st Street");
 		  Thread.sleep(2000);
@@ -145,8 +150,8 @@ public void setUp1() {
 		  WebElement locationZipCode2 = driver.findElement(By.id("ctl00_ContentMainHolder_ucLocationInformation_txtZipCodeplus"));
 		  locationZipCode2.sendKeys("6789");
 		  Thread.sleep(2000);
-			
-		  
+		  /*
+	  
 		//  WebElement specialityAreaSection = driver.findElement(By.id("ctl00_ContentMainHolder_ImgSpecAreaExpand"));
 		  
 		//  specialityAreaSection.click();
