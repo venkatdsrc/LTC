@@ -84,7 +84,7 @@ public void setUp1() {
 		  String currURL = driver.getCurrentUrl();
 		  String currPageTitle = driver.getTitle();
 		  String currWinHandle = driver.getWindowHandle();
-		  System.out.println("Updated on 16/3..");
+		  System.out.println("Updated on 16/3..updated 1155am");
 		  System.out.println("Current URL : " + currURL + " "+ "Current Page Title : "+currPageTitle+" " + "Current Window Handle : " + currWinHandle);
 		  
 		  LoginPage objLoginPage = new LoginPage(driver);
