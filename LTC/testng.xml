@@ -20,6 +20,5 @@
 		<class name="test.java.scripts.Login"/>
  	</classes>
 </test> <!-- Default test -->
-
 </suite> <!-- Default suite -->
 
