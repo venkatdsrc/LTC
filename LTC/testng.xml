@@ -4,7 +4,6 @@
 	 <listeners>
         <listener class-name="org.testng.reporters.SuiteHTMLReporter" />
     </listeners>
-    
 <test name="Run on Windows7/FF" >
  	<parameter name="os" value="windows" />
 		<parameter name="browser" value="iexplore" />
